@@ -1,0 +1,101 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Usuarios</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Usuarios</li>
+            </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+     <div class="container-fluid">
+     <div id="tabla">
+      <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-11">
+              <div class="table-responsive">
+                <div class="d-flex justify-content-end mb-2">
+                  <button class="btn btn-success" (click)="nuevoUsuario()">Nuevo Usuario</button>
+                </div>                
+                  <table class="table">
+                      <tr>
+                          <th>No. Usuario</th>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                          <th>Dirección</th>
+                          <th>Celular</th>
+                          <th>Email</th>
+                          <th>Rol</th>
+                          
+                      </tr>
+                      <tr *ngFor="let item of usuario">
+                        <td style="color: rgb(43, 165, 226); font-weight: bold;">0{{item.id_usuario}}</td>
+                        <td>{{item.ident}}</td>
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.direccion}}</td>
+                        <td>{{item.celular}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.rol}}</td>
+                        <td>
+                          <button class="btn btn-warning" (click)="editarUsuario(item)">Editar</button>
+                          <button class="btn btn-danger" (click)="eliminarUsuario(item.id_usuario)">Eliminar</button>
+                        </td>                          
+                    </tr>      
+                  </table>
+              </div>
+          </div>
+      </div>
+
+    </div> 
+   </div>
+
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="usuarioModal" tabindex="-1" aria-labelledby="usuarioModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <form (ngSubmit)="guardarUsuario()">
+      <div class="modal-header">
+        <h5 class="modal-title" id="usuarioModalLabel">{{ esEdicion ? 'Editar usuario' : 'Nuevo usuario' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Identificación</label>
+          <input type="text" [(ngModel)]="usuarioActual.ident" name="ident" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Nombre</label>
+          <input type="text" [(ngModel)]="usuarioActual.nombre" name="nombre" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Dirección</label>
+          <input type="text" [(ngModel)]="usuarioActual.direccion" name="direccion" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Celular</label>
+          <input type="text" [(ngModel)]="usuarioActual.celular" name="celular" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Correo</label>
+          <input type="email" [(ngModel)]="usuarioActual.email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Rol</label>
+          <input type="text" [(ngModel)]="usuarioActual.rol" name="rol" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+  
+      </div>
+      

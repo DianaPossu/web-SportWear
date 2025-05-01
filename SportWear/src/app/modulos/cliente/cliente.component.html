@@ -1,0 +1,98 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Clientes</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Clientes</li>
+            </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+     <div class="container-fluid">     
+      <div id="tabla">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>No. Cliente</th>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Dirección</th>
+                            <th>Celular</th>
+                            <th>Email</th>
+                            <th>Ciudad</th>
+                            <button class="btn btn-success mb-3" (click)="nuevoCliente()">Nuevo Cliente</button>
+                        </tr>
+                        <tr *ngFor="let item of cliente">
+                          <td style="color: rgb(162, 43, 226); font-weight: bold;">0{{item.id_cliente}}</td>
+                          <td>{{item.ident}}</td>
+                          <td>{{item.nombre}}</td>
+                          <td>{{item.direccion}}</td>
+                          <td>{{item.celular}}</td>
+                          <td>{{item.email}}</td>
+                          <td>{{item.fo_ciudad}}</td>
+                          <td>
+                            <button class="btn btn-warning" (click)="editarCliente(item)">Editar</button>
+                            <button class="btn btn-danger" (click)="eliminarCliente(item.id_cliente)">Eliminar</button>
+                          </td>                          
+                      </tr>      
+                    </table>
+                </div>
+            </div>
+        </div>
+
+      </div> 
+     </div>
+
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="clienteModal" tabindex="-1" aria-labelledby="clienteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="guardarCliente()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="clienteModalLabel">{{ esEdicion ? 'Editar Cliente' : 'Nuevo Cliente' }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Identificación</label>
+            <input type="text" [(ngModel)]="clienteActual.ident" name="ident" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" [(ngModel)]="clienteActual.nombre" name="nombre" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Dirección</label>
+            <input type="text" [(ngModel)]="clienteActual.direccion" name="direccion" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Celular</label>
+            <input type="text" [(ngModel)]="clienteActual.celular" name="celular" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input type="email" [(ngModel)]="clienteActual.email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ciudad</label>
+            <input type="text" [(ngModel)]="clienteActual.fo_ciudad" name="fo_ciudad" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="guardarCliente()">Guardar</button>
+          </div>
+    
+        </div>
+        

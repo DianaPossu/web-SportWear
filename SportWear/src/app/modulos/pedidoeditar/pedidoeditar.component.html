@@ -1,0 +1,71 @@
+<div class="container mt-4">
+   <!--<h2>{{ pedido?.fo_cliente ? 'Editar Pedido' : 'Nuevo Pedido' }}</h2>-->
+  <h2>{{ modoEdicion ? 'Editar Pedido' : 'Nuevo Pedido' }}</h2>
+
+  <!-- Buscar cliente -->
+  <div class="mb-3">
+    <label for="ident_cliente" class="form-label">Identificación del Cliente:</label>
+    <input type="text" class="form-control" [(ngModel)]="ident_cliente" (keyup.enter)="consulta_cliente()" placeholder="Ingrese número de documento" />
+    <button class="btn btn-primary mt-2" (click)="consulta_cliente()">Buscar Cliente</button>
+  </div>
+
+  <!-- Mostrar nombre del cliente -->
+  <div *ngIf="nombre_cliente">
+    <p><strong>Cliente:</strong> {{ nombre_cliente }}</p>
+  </div>
+
+  <!-- Listado de productos disponibles -->
+  <div class="mb-4">
+    <h5>Productos disponibles:</h5>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Seleccionar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of productos">
+          <td>{{ prod.codigo }}</td>
+          <td>{{ prod.nombre }}</td>
+          <td>${{ prod.precio_venta }}</td>
+          <td>
+            <button class="btn btn-sm btn-success" (click)="seleccionar(prod, prod.id_producto)">Agregar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Productos seleccionados para el pedido -->
+  <div *ngIf="matriz_producto.length > 0">
+    <h5>Productos seleccionados:</h5>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of matriz_producto">
+          <td>{{ item[0] }}</td>
+          <td>{{ item[1] }}</td>
+          <td>${{ item[2] }}</td>
+          <td>{{ item[3] }}</td>
+          <td>${{ item[4] }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Total del pedido: ${{ total }}</h4>
+  </div>
+
+  <!-- Botón Guardar -->
+  <button class="btn btn-success mt-3" (click)="guardar()">Guardar Pedido</button>
+</div>

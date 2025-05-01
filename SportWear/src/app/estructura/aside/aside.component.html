@@ -1,0 +1,69 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+  <a href="index3.html" class="brand-link">
+      <img src="../../../assets/dist/img/avatar(2).png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SW</span>
+    </a>
+
+    <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        
+        <div class="info">
+          <a href="#" class="d-block">{{nombre}}</a>
+        </div>
+      </div>
+
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+               <li class="nav-item">
+                <a [routerLink]="['/dashboard']" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li> 
+          <li class="nav-item">
+            <a [routerLink]="['/categoria']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Categorias
+              </p>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a [routerLink]="['/producto']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Productos
+              </p>
+            </a>
+          </li> 
+          <li class="nav-item" *ngIf="rol!='cliente'">
+            <a [routerLink]="['/cliente']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Clientes
+              </p>
+            </a>
+          </li> 
+          <li class="nav-item" *ngIf="rol!='cliente'">
+            <a [routerLink]="['/pedido']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Pedidos
+              </p>
+            </a>
+          </li> 
+          <li class="nav-item" *ngIf="rol!='cliente'">
+            <a [routerLink]="['/usuario']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li> 
+        </ul>
+      </nav>
+    </div>
+  </aside>

@@ -1,0 +1,88 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Pedidos</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Pedidos</li>
+            </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+     <div class="container-fluid">
+      <hr>
+      <input type="button" value="Insertar Pedido" class="btn btn-warning" (click)="insertar()">  
+      <hr>      
+      <div id="tabla">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>No. Venta</th>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Descripción</th>
+                            <th>Total</th>
+                            <th>Vendedor</th>
+                            <th>Acciones</th>
+                        </tr>
+                        <tr *ngFor="let item of ventas">
+                            <td style="color: rgb(226, 43, 174); font-weight: bold;">0{{item.id_venta}}</td>
+                            <td>{{item.fecha}}</td>
+                            <td>{{item.nombrecl}}</td>
+                            <td>
+                              <input type="button" class="btn btn-outline-success btn-sm" value="Ver Productos" (click)
+                              ="mostrar_modal(1, item.id_venta)">
+                            </td>
+                            <td>{{item.total | currency}}</td>
+                            <td>{{item.vendedor}}</td>
+                            <td>
+                                <span class="fas fa-edit" style="color: yellow; cursor: pointer" title="Editar"(click)="editar(item.id_venta)"></span>
+                                <span class="fas fa-minus-square" style="color: red; cursor: pointer" title="Anular"(click)="anular(item.id_venta)"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+      </div> 
+     </div>
+</section>
+
+<!-- Modal-->
+
+<div id="verproductos" *ngIf="modal==true">
+  <table class="table">
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th>V. unitario</th>
+      <th>Cantidad</th>
+      <th>Subtotal</th>
+    </tr>
+    <tr *ngFor="let itemp of productos">
+      <td>{{itemp[0]}}</td>
+      <td>{{itemp[1]}}</td>
+      <td>{{itemp[2] | currency}}</td>
+      <td>{{itemp[3]}}</td>
+      <td>{{itemp[4] | currency}}</td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>TOTAL:</td>
+      <td>{{total | currency}}</td>
+    </tr>
+  </table>  
+  <input type="button" class="btn btn-secondary" value="Cerrar" (click)="mostrar_modal(0, 1)">
+</div>
+
+

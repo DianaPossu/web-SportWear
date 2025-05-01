@@ -1,0 +1,19 @@
+<div id="login" class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+    <div id="form">
+    <img src="../../../assets/dist/img/icono.ico" width="88%">
+    <div id="datos">
+    <input type="email" id="email" placeholder="Email" class="form-control" [(ngModel)]="email"><br>
+    <input type="password" id="clave" placeholder="Contraseña" class="form-control" [(ngModel)]="clave"><br>
+    <div class="col-12" *ngIf="error==true">
+    <span style="color:#ff557f;">Email o contraseña incorrecta</span><br>
+    </div>
+    <input type="button" value="Ingresar" class="btn btn-warning btn-block" value="INICIAR SESIÓN" (click)
+    ="consulta('')">
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-4"></div>
+</div>

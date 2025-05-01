@@ -1,0 +1,114 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Productos</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Productos</li>
+            </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <!-- contenido-->
+        <hr>
+        <input type="button" value="Insertar Producto" class="btn btn-warning" (click)="mostrar_form('ver')"><hr>
+        <!--formulario-->
+        <div id="formulario" *ngIf="mform==true">
+            <div class="row">
+                <div class="col-lg-4">
+                    <input type="text" id="codigo"  placeholder="Código del producto" class="form-control" [(ngModel)]="obj_producto.codigo">
+                    <span style="color: red;" *ngIf="validar_codigo == false" >Insertar código</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="obj_producto.nombre">
+                    <span style="color: red;" *ngIf="validar_nombre == false" >Insertar nombre del producto</span>
+                </div>
+                <div class="col-lg-4">
+                    <select class="form-control form-select" [(ngModel)]="obj_producto.fo_categoria">
+                        <option value="0" label="Seleccionar Categoria" selected="selected">Seleccionar Categoria</option>
+                        <option *ngFor="let itemc of categoria" value="{{itemc.id_categoria}}">{{itemc.nombre}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="validar_categoria == false" >Seleccionar categoria</span>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <input type="number" class="form-control" placeholder="Precio_compra" [(ngModel)]="obj_producto.precio_compra">
+                    <span style="color: red;" *ngIf="validar_pcompra == false" >Insertar precio de la compra</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" class="form-control" placeholder="Precio_venta" [(ngModel)]="obj_producto.precio_venta">
+                    <span style="color: red;" *ngIf="validar_pventa == false" >Insertar precio de la venta</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" class="form-control" placeholder="stock" [(ngModel)]="obj_producto.stock">
+                    <span style="color: red;" *ngIf="validar_stock == false" >Insertar stock</span>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                   <select class="form-control form-select" [(ngModel)]="obj_producto.fo_proveedor">
+                        <option value="0" label="Seleccionar Proveedor" selected="selected">Seleccionar Proveedor</option>
+                        <option *ngFor="let itempr of proveedor" value="{{itempr.id_prov}}">{{itempr.nombre}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="validar_proveedor == false">Seleccionar proveedor</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')"
+                    *ngIf="botones_form == false">
+                    <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')"
+                    *ngIf="botones_form == true">
+                </div>
+                <div class="col-lg-4"><input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click) 
+                ="mostrar_form('no ver')"></div>
+            </div>
+        </div>
+        <hr>
+        <div id="tabla">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Categoria</th>
+                            <th>Precio Compra</th>
+                            <th>Precio Venta</th>
+                            <th>Stock</th>
+                            <th>Proveedor</th>
+                            <th>Acciones</th>
+                        </tr>
+                        <tr *ngFor="let item of producto">
+                            <td>{{item.codigo}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.categoria}}</td>
+                            <td>{{item.precio_compra | currency}}</td>
+                            <td>{{item.precio_venta | currency}}</td>
+                            <td>{{item.stock}}</td>
+                            <td>{{item.proveedor}}</td> 
+                            <td>
+                                <span class="fas fa-edit" style="color: yellow; cursor: pointer" title="Editar" (click)
+                                ="cargar_datos(item, item.id_producto)"></span>
+                                <span class="fas fa-minus-square" style="color: red; cursor: pointer" title="Eliminar" (click)
+                                ="eliminar(item.id_producto)"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </section>
