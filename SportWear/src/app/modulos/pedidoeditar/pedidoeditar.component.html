@@ -1,20 +1,16 @@
 <div class="container mt-4">
-   <!--<h2>{{ pedido?.fo_cliente ? 'Editar Pedido' : 'Nuevo Pedido' }}</h2>-->
   <h2>{{ modoEdicion ? 'Editar Pedido' : 'Nuevo Pedido' }}</h2>
 
-  <!-- Buscar cliente -->
   <div class="mb-3">
     <label for="ident_cliente" class="form-label">Identificación del Cliente:</label>
     <input type="text" class="form-control" [(ngModel)]="ident_cliente" (keyup.enter)="consulta_cliente()" placeholder="Ingrese número de documento" />
     <button class="btn btn-primary mt-2" (click)="consulta_cliente()">Buscar Cliente</button>
   </div>
 
-  <!-- Mostrar nombre del cliente -->
   <div *ngIf="nombre_cliente">
     <p><strong>Cliente:</strong> {{ nombre_cliente }}</p>
   </div>
 
-  <!-- Listado de productos disponibles -->
   <div class="mb-4">
     <h5>Productos disponibles:</h5>
     <table class="table table-bordered">
@@ -39,7 +35,6 @@
     </table>
   </div>
 
-  <!-- Productos seleccionados para el pedido -->
   <div *ngIf="matriz_producto.length > 0">
     <h5>Productos seleccionados:</h5>
     <table class="table table-striped">
@@ -66,6 +61,5 @@
     <h4>Total del pedido: ${{ total }}</h4>
   </div>
 
-  <!-- Botón Guardar -->
   <button class="btn btn-success mt-3" (click)="guardar()">Guardar Pedido</button>
 </div>
