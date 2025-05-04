@@ -5,16 +5,7 @@ import { PedidoService } from 'src/app/servicios/pedido.service';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { FetchBackend } from '@angular/common/http';
 
-import { ActivatedRoute } from '@angular/router'; // 👈 Importa esto
-
-//constructor(
- // private router: Router,
-  //private route: ActivatedRoute, // 👈 Añadir
-  //private sproductos: ProductoService,
-  //private scliente: ClienteService,
-  //private spedido: PedidoService
-//) {}
-
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -45,10 +36,6 @@ export class PedidoeditarComponent {
 
   constructor(private router:Router,private route: ActivatedRoute, private sproductos: ProductoService, private scliente: ClienteService, private spedido:
   PedidoService){}
-
-  /*ngOnInit(): void{
-    this.consulta_productos();
-  }*/
 
   consulta_productos(){
     this.sproductos.consultar().subscribe((result:any)=>{
@@ -100,39 +87,13 @@ export class PedidoeditarComponent {
     });
   }
   
-
-  /*guardar(){
-
-
-    let fecha = new Date();
-    this.pedido.fecha = `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`;
-    this.pedido.fo_cliente = Number(this.cliente[0].id_cliente);
-    this.pedido.productos = this.matriz_producto;
-    this.pedido.subtotal = this.total;
-    this.pedido.total = this.total;
-    this.pedido.fo_vendedor = Number(sessionStorage.getItem('id'));
-    console.log(this.pedido);
-
-
-    this.spedido.insertar(this.pedido).subscribe((datos:any) => {
-    console.log("Respuesta del servidor:", datos); 
-    if (datos['resultado']=='OK'){
-    //console.log(datos['resultado']);
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-    this.router.navigate(['pedido']);
-    });
-  }
-  });
-
-  }
-}*/
 cargarPedidoCompleto(id: number) {
   this.spedido.obtenerPorId(id).subscribe((pedidoData: any) => {
     this.pedido = {
       id_venta: pedidoData.id_venta,
       fecha: pedidoData.fecha,
       fo_cliente: pedidoData.fo_cliente,
-      productos: JSON.parse(pedidoData.productos), // si vienen serializados
+      productos: JSON.parse(pedidoData.productos),
       subtotal: pedidoData.subtotal,
       total: pedidoData.total,
       fo_vendedor: pedidoData.fo_vendedor
@@ -163,7 +124,7 @@ guardar() {
   this.spedido.editar(id, this.pedido).subscribe((datos: any) => {
     if (datos['resultado'] == 'OK') {
       alert("Pedido actualizado correctamente.");
-      this.router.navigate(['pedido']); // 👈 redirigir a la lista
+      this.router.navigate(['pedido']);
     } else {
       alert("Error al actualizar el pedido.");
     }
