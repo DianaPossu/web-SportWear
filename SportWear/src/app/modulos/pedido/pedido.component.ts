@@ -28,12 +28,11 @@ export class PedidoComponent {
   }  
 
   consultap(id: number) {
-    this.total = 0;  // Reseteamos el total antes de calcularlo
+    this.total = 0;
     this.spedido.consultarp(id).subscribe((result: any) => {
       this.productos = result;
-      // Sumamos los subtotales de cada producto
       for (let i = 0; i < this.productos.length; i++) {
-        this.total += this.productos[i][4];  // itemp[4] es el subtotal
+        this.total += this.productos[i][4];
       }
     });
   }
@@ -54,15 +53,11 @@ export class PedidoComponent {
     }
   }
 
-  // Función para editar
   editar(id: number) {
     this.router.navigate(['pedidoeditar', id]);
   }
 
-  
-
-  // Función para anular
-  anular(id: number) {
+    anular(id: number) {
     if (confirm('¿Estás seguro de anular este pedido?')) {
       this.spedido.eliminar(id).subscribe((resp: any) => {
         if (resp.resultado === 'OK') {
